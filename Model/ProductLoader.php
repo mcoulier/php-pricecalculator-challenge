@@ -11,6 +11,7 @@ class ProductLoader extends Connection
         foreach ($handle->fetchAll() as $product){
             array_push($this->products, new Product($product['id'], $product['name'], $product['price']));
         }
+
     /*    $result = $handle->fetchAll();*/
     }
 
@@ -20,5 +21,10 @@ class ProductLoader extends Connection
     public function getProducts(): array
     {
         return $this->products;
+    }
+
+    public function dividePrice()
+    {
+
     }
 }
