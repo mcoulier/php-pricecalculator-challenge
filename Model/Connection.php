@@ -15,3 +15,5 @@ $pdo = new PDO('mysql:host='. $dbhost .';dbname='. $db, $dbuser, $dbpass, $drive
 // Why we do this here
 return $pdo;
 }
+
+openConnection();
