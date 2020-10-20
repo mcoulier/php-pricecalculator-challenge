@@ -10,5 +10,11 @@ require_once 'Model/Connection.php';
 require_once 'Model/Product.php';
 require_once 'Model/ProductLoader.php';
 
-
 $products = new ProductLoader();
+
+$productsArray = $products->getProducts();
+
+foreach ($productsArray as $product){
+    echo $product->getName();
+    echo $product->getPrice();
+}
