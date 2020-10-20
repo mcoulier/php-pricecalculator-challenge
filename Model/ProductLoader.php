@@ -9,8 +9,16 @@ class ProductLoader extends Connection
         $handle = $this->openConnection()->prepare('SELECT * FROM product');
         $handle->execute();
         foreach ($handle->fetchAll() as $product){
-            $this->products[] = new Product($product['id'], $product['name'], $product['price']);
+            array_push($this->products, new Product($product['id'], $product['name'], $product['price']));
         }
     /*    $result = $handle->fetchAll();*/
+    }
+
+    /**
+     * @return array
+     */
+    public function getProducts(): array
+    {
+        return $this->products;
     }
 }
