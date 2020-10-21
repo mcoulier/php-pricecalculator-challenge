@@ -15,7 +15,7 @@ class CustomerLoader extends Connection
         foreach ($handle->fetchAll() as $customer) {
             $this->customers[] = new Customer(
                 $customer['id'],
-                $customer['firstname'],     //always use name from db between squarebrackets
+                $customer['firstname'],     //always use name from db between square brackets
                 $customer['lastname'],
                 $customer['group_id'],
                 $customer['fixed_discount'],
