@@ -1,19 +1,21 @@
 <?php
 
-
-class CustomergroupLoader extends Connection
+class CustomerGroupLoader extends Connection
 {
-    private array $customergroups = [];
+    private array $customer_groups = [];
 
     public function __construct()
     {
-        $handle = $this->openConnection()->prepare('SELECT * FROM product');
+        $handle = $this->openConnection()->prepare('SELECT * FROM customer_group');
         $handle->execute();
-        foreach ($handle->fetchAll() as $product) {
-            $this->customergroups[] = new Product($product['id'], $product['name'], $product['price']);
-            /*    $result = $handle->fetchAll();*/
-            //print_r($this->products);
+        foreach ($handle->fetchAll() as $customer_group) {
+            $this->customer_groups[] = new CustomerGroup(
+                $customer_group['id'],
+                $customer_group['name'],
+                $customer_group['parent_id'],
+                $customer_group['fixed_discount'],
+                $customer_group['variable_discount']
+            );
         }
-
     }
 }

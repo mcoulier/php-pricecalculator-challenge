@@ -9,10 +9,12 @@ class ProductLoader extends Connection
         $handle = $this->openConnection()->prepare('SELECT * FROM product');
         $handle->execute();
         foreach ($handle->fetchAll() as $product){
-            array_push($this->products, new Product($product['id'], $product['name'], $product['price']));
+            $this->products[] = new Product(
+                $product['id'],
+                $product['name'],
+                $product['price']
+            );
         }
-
-    /*    $result = $handle->fetchAll();*/
     }
 
     /**
@@ -22,9 +24,5 @@ class ProductLoader extends Connection
     {
         return $this->products;
     }
-
-    public function dividePrice()
-    {
-
-    }
 }
+

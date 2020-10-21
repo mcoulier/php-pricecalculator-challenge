@@ -1,27 +1,41 @@
 <?php
 
-class Customer{
+declare(strict_types=1);
+
+class Customer
+{
+    private int $id;
     private string $firstname;
     private string $lastname;
     private int $group_id;
-    private int $fixed_discount;
-    private int $variable_discount;
+    private $fixed_discount;
+    private $variable_discount;
 
     /**
      * Customer constructor.
+     * @param int $id
      * @param string $firstname
      * @param string $lastname
-     * @param string $group_id
-     * @param string $fixed_discount
-     * @param string $variable_discount
+     * @param int $group_id
+     * @param int $fixed_discount
+     * @param int $variable_discount
      */
-    public function __construct(string $firstname, string $lastname, int $group_id, int $fixed_discount, int $variable_discount)
+    public function __construct(int $id, string $firstname, string $lastname, int $group_id, $fixed_discount, $variable_discount)
     {
+        $this->id = $id;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->group_id = $group_id;
         $this->fixed_discount = $fixed_discount;
         $this->variable_discount = $variable_discount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     /**
@@ -41,7 +55,7 @@ class Customer{
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getGroupId(): int
     {
@@ -49,21 +63,20 @@ class Customer{
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getFixedDiscount(): int
+    public function getFixedDiscount()
     {
         return $this->fixed_discount;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getVariableDiscount(): int
+    public function getVariableDiscount()
     {
         return $this->variable_discount;
     }
-
 
 
 }
