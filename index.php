@@ -12,7 +12,7 @@ require 'Model/ProductLoader.php';
 require 'Model/Customer.php';
 require 'Model/CustomerLoader.php';
 require 'Model/CustomerGroup.php';
-require 'Model/CustomergroupLoader.php';
+require 'Model/CustomerGroupLoader.php';
 require 'Controller/HomepageController.php';
 
 $controller = new HomepageController();
