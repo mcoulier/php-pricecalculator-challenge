@@ -18,7 +18,7 @@
 </select>
 <select name="customers" id="customers">
     <?php foreach ($customers->getCustomers() AS $customer){?>
-        <option value="<?php echo $customer->getFirstname() ?>"><?php echo $customer->getFirstname()?></option>
+        <option value="<?php echo $customer->getFirstname() ?>"><?php echo $customer->getLastname()?></option>
     <?php }?>
 </select>
 
