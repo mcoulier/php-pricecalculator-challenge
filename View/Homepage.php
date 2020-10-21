@@ -16,7 +16,11 @@
         <option value="<?php echo $product->getPrice() ?>"><?php echo $product->getName()?></option>
     <?php }?>
 </select>
-
+<select name="customers" id="customers">
+    <?php foreach ($customers->getCustomers() AS $customer){?>
+        <option value="<?php echo $customer->getFirstname() ?>"><?php echo $customer->getFirstname()?></option>
+    <?php }?>
+</select>
 
 
 <!-- Optional JavaScript -->
