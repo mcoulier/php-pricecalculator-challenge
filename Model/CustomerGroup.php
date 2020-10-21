@@ -4,19 +4,19 @@ class CustomerGroup
 {
     private int $id;
     private string $name;
-    private int $parent_id;
-    private int $fixed_discount;
-    private int $variable_discount;
+    private $parent_id;
+    private $fixed_discount;
+    private $variable_discount;
 
     /**
      * CustomerGroup constructor.
      * @param int $id
      * @param string $name
-     * @param int $parent_id
+     * @param $parent_id
      * @param int $fixed_discoount
      * @param int $variable_discount
      */
-    public function __construct(int $id, string $name, int $parent_id, int $fixed_discount, int $variable_discount)
+    public function __construct(int $id, string $name, $parent_id, $fixed_discount, $variable_discount)
     {
         $this->id = $id;
         $this->name = $name;
@@ -44,7 +44,7 @@ class CustomerGroup
     /**
      * @return int
      */
-    public function getParentId(): int
+    public function getParentId()
     {
         return $this->parent_id;
     }
@@ -52,7 +52,7 @@ class CustomerGroup
     /**
      * @return int
      */
-    public function getFixedDiscount(): int
+    public function getFixedDiscount()
     {
         return $this->fixed_discount;
     }
@@ -60,7 +60,7 @@ class CustomerGroup
     /**
      * @return int
      */
-    public function getVariableDiscount(): int
+    public function getVariableDiscount()
     {
         return $this->variable_discount;
     }

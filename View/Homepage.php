@@ -15,7 +15,7 @@
     <label>Customer</label>
     <select name="customers" id="customers">
         <?php foreach ($customers->getCustomers() as $customer) { ?>
-            <option value="<?php echo $customer->getId() ?>"><?php echo $customer->getFirstname() . " " . $customer->getLastname() ?></option>
+            <option value="<?php echo $customer->getGroupId()?>,<?php echo $customer->getFixedDiscount()?>,<?php echo $customer->getVariableDiscount()?>"><?php echo $customer->getFirstname() . " " . $customer->getLastname() ?></option>
         <?php } ?>
     </select>
 

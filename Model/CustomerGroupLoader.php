@@ -18,4 +18,13 @@ class CustomerGroupLoader extends Connection
             );
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getCustomerGroups(): array
+    {
+        return $this->customer_groups;
+    }
+
 }
