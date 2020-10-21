@@ -11,16 +11,18 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<select name="customers" id="customers">
+    <?php foreach ($customers->getCustomers() AS $customer){?>
+        <option value="<?php echo $customer->getId() ?>"><?php echo $customer->getFirstname() . " " . $customer->getLastname()?></option>
+    <?php }?>
+</select>
+
 <select name="product" id="product">
     <?php foreach ($products->getProducts() AS $product){?>
         <option value="<?php echo $product->getPrice() ?>"><?php echo $product->getName()?></option>
     <?php }?>
 </select>
-<select name="customers" id="customers">
-    <?php foreach ($customers->getCustomers() AS $customer){?>
-        <option value="<?php echo $customer->getFirstname() ?>"><?php echo $customer->getLastname()?></option>
-    <?php }?>
-</select>
+
 
 
 <!-- Optional JavaScript -->
