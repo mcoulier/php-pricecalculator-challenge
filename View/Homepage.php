@@ -25,6 +25,7 @@
         <option value="<?php echo $product->getId() ?>"><?php echo $product->getName()?></option>
     <?php }?>
 </select>
+<<<<<<< HEAD
 <button type="submit">Submit</button>
 </form>
 <hr/>
@@ -32,6 +33,13 @@
     <?php echo $customer->getFirstname() ?>
 <?php }?>
 
+=======
+<select name="customers" id="customers">
+    <?php foreach ($customers->getCustomers() AS $customer){?>
+        <option value="<?php echo $customer->getFirstname() ?>"><?php echo $customer->getFirstname()?></option>
+    <?php }?>
+</select>
+>>>>>>> 4dc56fca6b3d5637553a7dcfe7959e4b4f0c180c
 
 
 <!-- Optional JavaScript -->
