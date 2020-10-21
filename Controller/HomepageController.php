@@ -7,7 +7,9 @@ class HomepageController
     {
 //you should not echo anything inside your controller - only assign vars here
 // then the view will actually display them.
+
         $products = new ProductLoader();
+
 //load the view
         require 'View/homepage.php';
     }
