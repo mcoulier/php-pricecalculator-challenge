@@ -7,7 +7,9 @@ class HomepageController
     public function render(array $GET, array $POST)
     {
         $products = new ProductLoader();
+        $getProducts = $products->getProducts();
         $customers = new CustomerLoader();
+        $getCustomers = $customers->getCustomers();
         $customerGroups = new CustomerGroupLoader();
         $getCustomerGroups = $customerGroups->getCustomerGroups();
 
@@ -21,28 +23,34 @@ class HomepageController
         }
 
         //if this is form submit try to calc the final price
-        if(isset($POST)){
-            //fetch the selected customer from the db
-            if(isset($POST['customers'])){
-                $customerId = $POST['customers'];
-                $result = explode(",", $customerId);
-                $groupId = $result[0];
+        if(isset($POST['customers']) && isset($POST['product'])){
+
+            $customerInput = $POST['customers'];
+            $getProductPrice = $POST['product'];
+            $result = explode(",", $customerInput);
+            $customerObject = loopArray($getCustomerGroups, $customerInput);
+            var_dump($customerObject);
+
+            if ($customerObject->getVariableDiscount() == null){
+
+            }
+
+
+
                 $customerFixedDiscount = $result[1];
-                var_dump($customerFixedDiscount);
                 $customerVarDiscount = $result[2];
-                var_dump($result);
-                $object = loopArray($getCustomerGroups, $groupId);
-/*                var_dump($object);*/
+/*                $customerGroupArray = explode(",", $custGroupArray);*/
+/*                $custGrpFixed = $customerGroupArray[3];*/
+
 
 /*                $customer = $customers->getCustomerById($customerId);*/
-            }
-            if (isset($POST['product'])){
-                $productId = $POST['product'];
-                $productArray = explode(",", $productId);
-                var_dump($productArray);
-                $productBasePrice = $productArray[0];
 
-            }
+/*                $productArray = explode(",", $productId);*/
+/*                $productBasePrice = $productArray[0];*/
+
+
+
+/*            do ($customerFixedDiscount)*/
 
 
             //fetch the selected product from the db
