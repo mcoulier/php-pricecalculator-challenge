@@ -14,21 +14,27 @@
 <form method="post">
     <label>Customer</label>
     <select name="customers" id="customers">
+        <!--Displaying customer names in dropdown, GroupID, Fixed & Variable discounts as option values-->
         <?php foreach ($customers->getCustomers() as $customer) { ?>
             <option value="<?php echo $customer->getGroupId()?>,<?php echo $customer->getFixedDiscount()?>,<?php echo $customer->getVariableDiscount()?>"><?php echo $customer->getFirstname() . " " . $customer->getLastname() ?></option>
         <?php } ?>
     </select>
-
+    <!--Displaying product names in dropdown, Price in option value-->
     <label>Product</label>
     <select name="product" id="product">
         <?php foreach ($products->getProducts() as $product) { ?>
-            <option value="<?php echo $product->getPrice() ?>"><?php echo $product->getName() ?></option>
+            <option value="<?php echo $product->getPrice()?>,<?php echo $product->getName()?>"><?php echo $product->getName()?></option>
         <?php } ?>
     </select>
     <button type="submit">Submit</button>
 </form>
 
-<?php echo ($totalPrice/100) ?>
+<?php
+echo "Product: ".$productArray[1]."<br>";
+echo "Base price: " . "€ " . ($productBasePrice/100)."<br>";
+echo "Your discount: " . "€ ". number_format(($productBasePrice-$totalPrice)/100, 2)."<br>";
+echo "Total price: " . "€ ". number_format(($totalPrice/100), 2 )."<br>"?>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
