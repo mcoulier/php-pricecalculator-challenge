@@ -22,11 +22,11 @@ class HomepageController
             }
         }
 
-        $varDiscounts = [];
+        $customerData = [];
         if (isset($POST['customers']) && isset($POST['product'])) {
-            $customerData = $POST['customers'];
+            $customerName = $POST['customers'];
             $productData = $POST['product'];
-            $result = explode(",", $customerData);
+            $result = explode(",", $customerName);
             $groupId = $result[0];
             //var_dump($result);
             $productArray = explode(",", $productData);
@@ -34,36 +34,36 @@ class HomepageController
             //var_dump($object);
             //$customer = $customers->getCustomerById($customerId);
 
+            //loop through all data to get groups and discounts
             $object = loopArray($getCustomerGroups, $groupId);
             if ($object->getVariableDiscount() == null) {
-                array_push($varDiscounts, $object);
+                array_push($customerData, $object);
 
                 do {
                     $object = loopArray($getCustomerGroups, $object->getParentId());
-                    array_push($varDiscounts, $object);
+                    array_push($customerData, $object);
 
                 } while ($object->getParentId() !== null);
 
             } elseif ($object->getVariableDiscount() !== null) {
-                array_push($varDiscounts, $object);
+                array_push($customerData, $object);
 
                 do {
                     $object = loopArray($getCustomerGroups, $object->getParentId());
-                    array_push($varDiscounts, $object);
+                    array_push($customerData, $object);
 
                 } while ($object->getParentId() !== null);
             }
 
             $variableDiscount = 0;
             $fixedDiscount = 0;
+            for ($i = 0; $i < count($customerData); $i++) {
 
-            for ($i = 0; $i < count($varDiscounts); $i++) {
-
-                if ($variableDiscount < $varDiscounts[$i]->getVariableDiscount()) {
-                    $variableDiscount = $varDiscounts[$i]->getVariableDiscount();
+                if ($variableDiscount < $customerData[$i]->getVariableDiscount()) {
+                    $variableDiscount = $customerData[$i]->getVariableDiscount();
                 }
-                if ($varDiscounts[$i]->getFixedDiscount() != null) {
-                    $fixedDiscount += $varDiscounts[$i]->getFixedDiscount();
+                if ($customerData[$i]->getFixedDiscount() != null) {
+                    $fixedDiscount += $customerData[$i]->getFixedDiscount();
                 }
             }
 
@@ -108,7 +108,6 @@ class HomepageController
             } else {
                 $totalPrice = $productBasePrice - $discount;
                 $totalPrice = $productBasePrice - ($result[1] * 100);
-                $discountDecimals = number_format($discount, 2);
             }
 
             //price can't be under 0
@@ -116,12 +115,8 @@ class HomepageController
                 $totalPrice = 0;
             }
 
+            var_dump($customerData);
 
-            var_dump($varDiscounts);
-
-            /*            $varDiscount = $varDiscounts[0]->getVariableDiscount();
-
-                        var_dump($varDiscount);*/
 
         }
 

@@ -78,5 +78,4 @@ class Customer
         return $this->variable_discount;
     }
 
-
 }

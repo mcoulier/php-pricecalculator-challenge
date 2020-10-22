@@ -15,7 +15,7 @@ class CustomerLoader extends Connection
         foreach ($handle->fetchAll() as $customer) {
             $this->customers[] = new Customer(
                 $customer['id'],
-                $customer['firstname'],     //always use name from db between square brackets
+                $customer['firstname'],
                 $customer['lastname'],
                 $customer['group_id'],
                 $customer['fixed_discount'],
@@ -30,23 +30,6 @@ class CustomerLoader extends Connection
     public function getCustomers(): array
     {
         return $this->customers;
-    }
 
-    public function getCustomerById(int $id)
-    {
-        $handle = $this->openConnection()->prepare('SELECT * FROM customer WHERE id = :id');
-        $handle->bindParam(':id', $id);
-        $handle->execute();
-        $customer = $handle->fetch();
-        if($customer){
-            return new Customer(
-                $customer['id'],
-                $customer['firstname'],     //always use name from db between square brackets
-                $customer['lastname'],
-                $customer['group_id'],
-                $customer['fixed_discount'],
-                $customer['variable_discount']
-            );
-        }
     }
 }

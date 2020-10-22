@@ -64,7 +64,4 @@ class CustomerGroup
     {
         return $this->variable_discount;
     }
-
-
-
 }
