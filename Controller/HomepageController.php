@@ -23,41 +23,57 @@ class HomepageController
         }
 
         //if this is form submit try to calc the final price
+        $varDiscounts = [];
+        //fetch the selected customer from the db
         if(isset($POST['customers']) && isset($POST['product'])){
+            $customerData = $POST['customers'];
+            $productData = $POST['product'];
+            $result = explode(",", $customerData);
+            $groupId = $result[0];
+            $customerFixedDiscount = $result[1];
+            //var_dump($customerFixedDiscount);
+            $customerVarDiscount = $result[2];
+            //var_dump($result);
+            /*                var_dump($object);*/
 
-            $customerInput = $POST['customers'];
-            $getProductPrice = $POST['product'];
-            $result = explode(",", $customerInput);
-            $customerObject = loopArray($getCustomerGroups, $customerInput);
-            var_dump($customerObject);
+            /*                $customer = $customers->getCustomerById($customerId);*/
 
-            if ($customerObject->getVariableDiscount() == null){
+            $object = loopArray($getCustomerGroups, $groupId);
+            if($object->getVariableDiscount() == null){
+                array_push($varDiscounts, $object);
+
+                do{
+                    $object = loopArray($getCustomerGroups, $object->getParentId());
+                    array_push($varDiscounts, $object);
+                    var_dump($object);
+
+                } while($object->getParentId() !== null);
+
+            } elseif ($object->getVariableDiscount() !== null){
+                array_push($varDiscounts, $object);
+
+                do{
+                    $object = loopArray($getCustomerGroups, $object->getParentId());
+                    array_push($varDiscounts, $object);
+                    var_dump($object);
+
+                }while($object->getParentId() !== null);
 
             }
 
 
-
-                $customerFixedDiscount = $result[1];
-                $customerVarDiscount = $result[2];
-/*                $customerGroupArray = explode(",", $custGroupArray);*/
-/*                $custGrpFixed = $customerGroupArray[3];*/
-
-
-/*                $customer = $customers->getCustomerById($customerId);*/
-
-/*                $productArray = explode(",", $productId);*/
-/*                $productBasePrice = $productArray[0];*/
-
-
-
-/*            do ($customerFixedDiscount)*/
-
-
-            //fetch the selected product from the db
-
-            //if we have both product and costumer calc final price
-
         }
+        /*if (isset($POST['product'])){
+            $productId = $POST['product'];
+            $productArray = explode(",", $productId);
+            var_dump($productArray);
+            $productBasePrice = $productArray[0];
+
+        }*/
+
+
+
+
 
         require 'View/Homepage.php';
     }
