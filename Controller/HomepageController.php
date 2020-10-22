@@ -10,13 +10,10 @@ class HomepageController
         $customers = new CustomerLoader();
         $customerGroups = new CustomerGroupLoader();
         $getCustomerGroups = $customerGroups->getCustomerGroups();
-/*        $getCustomers = $customers->getCustomers();*/
-/*        var_dump($customerGroups);*/
 
         function loopArray($array, $value){
             foreach ($array as $customerGroup){
                 if ($customerGroup->getId() == $value){
-                    /*                            var_dump($customerGroup);*/
                     return $customerGroup;
                 }
             }
@@ -28,18 +25,25 @@ class HomepageController
             //fetch the selected customer from the db
             if(isset($POST['customers'])){
                 $customerId = $POST['customers'];
-/*                $customerVariableDiscount = $POST['customers'];*/
                 $result = explode(",", $customerId);
-/*                var_dump($result);*/
                 $groupId = $result[0];
-                var_dump($groupId);
-
-
+                $customerFixedDiscount = $result[1];
+                var_dump($customerFixedDiscount);
+                $customerVarDiscount = $result[2];
+                var_dump($result);
                 $object = loopArray($getCustomerGroups, $groupId);
-                var_dump($object);
+/*                var_dump($object);*/
 
 /*                $customer = $customers->getCustomerById($customerId);*/
             }
+            if (isset($POST['product'])){
+                $productId = $POST['product'];
+                $productArray = explode(",", $productId);
+                var_dump($productArray);
+                $productBasePrice = $productArray[0];
+
+            }
+
 
             //fetch the selected product from the db
 
