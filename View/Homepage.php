@@ -28,7 +28,7 @@
     <button type="submit">Submit</button>
 </form>
 
-<?php echo ($productBasePrice)/100 ?>
+<?php echo ($totalPrice/100) ?>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

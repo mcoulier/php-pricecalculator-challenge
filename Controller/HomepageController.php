@@ -30,10 +30,9 @@ class HomepageController
             $productData = $POST['product'];
             $result = explode(",", $customerData);
             $groupId = $result[0];
-            $customerFixedDiscount = $result[1];
-            //var_dump($customerFixedDiscount);
-            $customerVarDiscount = $result[2];
-            //var_dump($result);
+            var_dump($result);
+            $productArray = explode(",", $productData);
+            $productBasePrice = $productArray[0];
             /*                var_dump($object);*/
 
             /*                $customer = $customers->getCustomerById($customerId);*/
@@ -45,7 +44,6 @@ class HomepageController
                 do{
                     $object = loopArray($getCustomerGroups, $object->getParentId());
                     array_push($varDiscounts, $object);
-                    var_dump($object);
 
                 } while($object->getParentId() !== null);
 
@@ -55,12 +53,74 @@ class HomepageController
                 do{
                     $object = loopArray($getCustomerGroups, $object->getParentId());
                     array_push($varDiscounts, $object);
-                    var_dump($object);
 
                 }while($object->getParentId() !== null);
-
             }
 
+            $variableDiscount = 0;
+            $fixedDiscount = 0;
+
+            for ($i = 0; $i < count($varDiscounts); $i++){
+
+                if($variableDiscount < $varDiscounts[$i]->getVariableDiscount()){
+                    $variableDiscount = $varDiscounts[$i]->getVariableDiscount();
+                }
+                if ($varDiscounts[$i]->getFixedDiscount() != null){
+                    $fixedDiscount += $varDiscounts[$i]->getFixedDiscount();
+                }
+            }
+
+            echo "this is variable ".$variableDiscount;
+            echo "this is fixed ".$fixedDiscount;
+
+            $variable = ($productBasePrice/100)*$variableDiscount;
+            $fixed = $fixedDiscount*100;
+            $discount = 0;
+            $varOrFixed = "";
+
+            if($variable > $fixed){
+                $discount = $variableDiscount;
+                $varOrFixed = "variable";
+            } else {
+                $discount = $fixed;
+                $varOrFixed = "fixed";
+            }
+
+            if($varOrFixed == "variable" && $result[2] != ""){
+                if ($discount < $result[2]){
+                    $discount = $result[2];
+                }
+            }
+
+            $totalPrice = 0;
+
+            if($varOrFixed == "variable" && $result[2] != ""){
+                $percent = ($productBasePrice/100)*$discount;
+                $totalPrice = $productBasePrice - $percent;
+            } elseif ($varOrFixed == "variable" && $result[2] == ""){
+                $totalPrice = $productBasePrice - ($result[1]*100);
+                $percent = ($totalPrice/100)*$discount;
+                $totalPrice = $totalPrice - $percent;
+
+            } elseif ($varOrFixed == "fixed" && $result[2] != ""){
+                $totalPrice = $productBasePrice - $discount;
+                $percent = ($totalPrice/100)*$result[2];
+                $totalPrice = $totalPrice - $percent;
+            } else {
+                $totalPrice = $productBasePrice - $discount;
+                $totalPrice = $productBasePrice - ($result[1]*100);
+            }
+
+            if($totalPrice < 0){
+                $totalPrice = 0;
+            }
+
+
+            var_dump($varDiscounts);
+
+/*            $varDiscount = $varDiscounts[0]->getVariableDiscount();
+
+            var_dump($varDiscount);*/
 
         }
         /*if (isset($POST['product'])){
