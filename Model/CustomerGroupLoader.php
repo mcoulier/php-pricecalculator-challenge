@@ -26,5 +26,4 @@ class CustomerGroupLoader extends Connection
     {
         return $this->customer_groups;
     }
-
 }

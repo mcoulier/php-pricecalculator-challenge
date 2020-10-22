@@ -7,9 +7,9 @@ class Connection
 // Try to figure out what these should be for you
 
         $dbhost    = "localhost";//probably localhost
-        $dbuser    = "Michiel";
-        $dbpass    = "becode";
-        $db        = "pricecalculator";
+        $dbuser    = "becode";
+        $dbpass    = "becode123";
+        $db        = "price-calculator";
 
 $driverOptions = [
 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",

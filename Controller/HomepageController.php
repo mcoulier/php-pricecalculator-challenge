@@ -57,6 +57,7 @@ class HomepageController
 
             $variableDiscount = 0;
             $fixedDiscount = 0;
+            //
             for ($i = 0; $i < count($customerData); $i++) {
 
                 if ($variableDiscount < $customerData[$i]->getVariableDiscount()) {
