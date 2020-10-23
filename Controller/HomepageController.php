@@ -42,6 +42,7 @@ class HomepageController
 
             //loop through all data to get parent IDs
             $object = loopArray($getCustomerGroups, $groupId);
+            var_dump($object);
             if ($object->getVariableDiscount() == null) {
                 array_push($customerData, $object);
 
@@ -49,16 +50,16 @@ class HomepageController
                     $object = loopArray($getCustomerGroups, $object->getParentId());
                     array_push($customerData, $object);
 
-                } while ($object->getParentId() !== null);
+                } while ($object->getParentId() !== null && $object->getVariableDiscount() !== null);
 
-            } elseif ($object->getVariableDiscount() !== null) {
+            /*} elseif ($object->getVariableDiscount() !== null) {
                 array_push($customerData, $object);
 
                 do {
                     $object = loopArray($getCustomerGroups, $object->getParentId());
                     array_push($customerData, $object);
 
-                } while ($object->getParentId() !== null);
+                } while ($object->getParentId() !== null);*/
             }
 
             $variableDiscount = 0;
