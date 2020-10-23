@@ -22,7 +22,11 @@ class HomepageController
             }
         }
 
+        $totalPrice = 0;
+        $productBasePrice = 0;
         $customerData = [];
+        $productArray = [];
+        $productArray[1] = "";
         if (isset($POST['customers']) && isset($POST['product'])) {
             $customerName = $POST['customers'];
             $productData = $POST['product'];
