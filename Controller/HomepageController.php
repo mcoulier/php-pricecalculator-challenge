@@ -33,7 +33,6 @@ class HomepageController
             $productData = $POST['product'];
             $result = explode(",", $customerName);
             $groupId = $result[0];
-            var_dump($customerName);
             $customerFirstLast = $result[3];
             //var_dump($result);
             $productArray = explode(",", $productData);
