@@ -119,10 +119,7 @@ class HomepageController
             if ($totalPrice < 0) {
                 $totalPrice = 0;
             }
-
-            var_dump($customerData);
-
-
+            
         }
 
         require 'View/Homepage.php';
