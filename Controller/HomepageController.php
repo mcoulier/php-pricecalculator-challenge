@@ -27,11 +27,14 @@ class HomepageController
         $customerData = [];
         $productArray = [];
         $productArray[1] = "";
+        $customerFirstLast = "";
         if (isset($POST['customers']) && isset($POST['product'])) {
             $customerName = $POST['customers'];
             $productData = $POST['product'];
             $result = explode(",", $customerName);
             $groupId = $result[0];
+            var_dump($customerName);
+            $customerFirstLast = $result[3];
             //var_dump($result);
             $productArray = explode(",", $productData);
             $productBasePrice = $productArray[0];

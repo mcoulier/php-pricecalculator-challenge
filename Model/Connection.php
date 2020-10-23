@@ -1,15 +1,12 @@
 <?php
-/*require 'resources/config.php';*/
+
 
 class Connection
 {
     public function openConnection() : PDO {
 // Try to figure out what these should be for you
+        require 'resources/config.php';
 
-        $dbhost    = "localhost";//probably localhost
-        $dbuser    = "Michiel";
-        $dbpass    = "becode";
-        $db        = "pricecalculator";
 
 $driverOptions = [
 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
