@@ -13,7 +13,8 @@ class HomepageController
         $customerGroups = new CustomerGroupLoader();
         $getCustomerGroups = $customerGroups->getCustomerGroups();
 
-        function loopArray($array, $value)
+        //function we use later to get the parent ID
+        function getIds($array, $value)
         {
             foreach ($array as $customerGroup) {
                 if ($customerGroup->getId() == $value) {
@@ -34,32 +35,19 @@ class HomepageController
             $result = explode(",", $customerName);
             $groupId = $result[0];
             $customerFirstLast = $result[3];
-            //var_dump($result);
             $productArray = explode(",", $productData);
             $productBasePrice = $productArray[0];
-            //var_dump($object);
-            //$customer = $customers->getCustomerById($customerId);
 
             //loop through all data to get parent IDs
-            $object = loopArray($getCustomerGroups, $groupId);
-            var_dump($object);
+            $object = getIds($getCustomerGroups, $groupId);
             if ($object->getVariableDiscount() == null) {
                 array_push($customerData, $object);
 
                 do {
-                    $object = loopArray($getCustomerGroups, $object->getParentId());
+                    $object = getIds($getCustomerGroups, $object->getParentId());
                     array_push($customerData, $object);
 
                 } while ($object->getParentId() !== null && $object->getVariableDiscount() !== null);
-
-            /*} elseif ($object->getVariableDiscount() !== null) {
-                array_push($customerData, $object);
-
-                do {
-                    $object = loopArray($getCustomerGroups, $object->getParentId());
-                    array_push($customerData, $object);
-
-                } while ($object->getParentId() !== null);*/
             }
 
             $variableDiscount = 0;
